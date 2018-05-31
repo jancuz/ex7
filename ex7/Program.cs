@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MyLibrary;
 
 namespace ex7
 {
@@ -37,6 +38,21 @@ namespace ex7
 
         static void Main(string[] args)
         {
+            int n, k;
+            int[] arr;
+            Console.WriteLine("Сочетания из N по K с повторениями:");
+            n = AskData.ReadIntNumber("Введите N: ", 1, int.MaxValue);
+            k = AskData.ReadIntNumber("Введите M: ", 1, int.MaxValue);
+            Console.WriteLine();
+            int size = Math.Max(n, k); // если k>n, то эти значения меняются местами
+            arr = new int[size];       // массив элементов подмножества
+            for (int i = 0; i < size; i++)
+                arr[i] = 1;
+            Print(arr, k);
+            while (NextSet(ref arr, n, k))
+                Print(arr, k);
+
+            Console.ReadLine();
         }
     }
 }
