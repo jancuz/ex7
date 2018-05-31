@@ -24,6 +24,17 @@ namespace ex7
             return true;
         }
 
+        // печать подмножества
+        static int num = 1;
+        static void Print(int[] arr, int n)
+        {
+            Console.Write("{0}: ", num);
+            num++;
+            for (int i = 0; i < n; i++)
+                Console.Write(arr[i]);
+            Console.WriteLine();
+        }
+
         static void Main(string[] args)
         {
         }
