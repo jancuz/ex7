@@ -11,27 +11,25 @@ namespace ex7
     {
         // получение подмножества (проверка на существование)
         // сочетание из N по K с повторениями
-        static bool NextSet(ref int[] arr, int n, int m)
+        static bool NextSet(ref int[] arr, int n, int k)
         {
-            int j = m - 1;  // позиция элемента
+            int j = k - 1;  // позиция элемента
             while (j >= 0 && arr[j] == n) j--;
             if (j < 0) return false;
-            if (arr[j] >= n)
-                j--;
             arr[j]++;
-            if (j == m - 1) return true;
-            for (int k = j + 1; k < m; k++)
-                arr[k] = arr[j];
+            if (j == k - 1) return true;
+            for (int i = j + 1; i < k; i++)
+                arr[i] = arr[j];
             return true;
         }
 
         // печать подмножества
         static int num = 1;
-        static void Print(int[] arr, int n)
+        static void Print(int[] arr, int k)
         {
             Console.Write("{0}: ", num);
             num++;
-            for (int i = 0; i < n; i++)
+            for (int i = 0; i < k; i++)
                 Console.Write(arr[i]);
             Console.WriteLine();
         }
@@ -42,16 +40,16 @@ namespace ex7
             int[] arr;
             Console.WriteLine("Сочетания из N по K с повторениями:");
             n = AskData.ReadIntNumber("Введите N: ", 1, int.MaxValue);
-            k = AskData.ReadIntNumber("Введите M: ", 1, int.MaxValue);
+            k = AskData.ReadIntNumber("Введите K: ", 1, int.MaxValue);
             Console.WriteLine();
-            int size = Math.Max(n, k); // если k>n, то эти значения меняются местами
-            arr = new int[size];       // массив элементов подмножества
-            for (int i = 0; i < size; i++)
+            arr = new int[k];       // массив элементов подмножества
+            for (int i = 0; i < k; i++)
                 arr[i] = 1;
             Print(arr, k);
             while (NextSet(ref arr, n, k))
                 Print(arr, k);
 
+            Console.WriteLine("Для завершения работы нажмите Enter");
             Console.ReadLine();
         }
     }
